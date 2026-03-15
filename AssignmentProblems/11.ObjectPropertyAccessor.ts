@@ -1,0 +1,2 @@
+function flatGet(){}
+function deepGet(){}
