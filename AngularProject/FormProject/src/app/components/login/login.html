@@ -1,0 +1,36 @@
+<div id="main">
+  <form [formGroup]="loginForm" id="loginForm" (ngSubmit)="onSubmit()">
+    <h1>Welcome to Login Form</h1>
+
+    <input
+      type="email"
+      placeholder="Please enter your email"
+      formControlName="email"
+    />
+
+    <br />
+    @if (email?.invalid && email?.touched) {
+      <span>Email is required</span>
+    }
+
+    <input
+      type="password"
+      placeholder="Please enter your password"
+      formControlName="password"
+    />
+
+    <br />
+    @if (
+      (password?.invalid && password?.touched) ||
+      password?.hasError("minlength")
+    ) {
+      <span>Password is required must be at least 6 characters long.</span>
+    }
+
+    <span
+      >Don't have an Account?
+      <a routerLink="/">Register</a>
+    </span>
+    <button type="submit">Login</button>
+  </form>
+</div>

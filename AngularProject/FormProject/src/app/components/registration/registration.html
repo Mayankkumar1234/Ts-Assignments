@@ -1,0 +1,77 @@
+<div id="main">
+  <form
+    [formGroup]="registrationForm"
+    id="registrationForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <h1>Welcome to Registration Form</h1>
+    <input
+      type="text"
+      placeholder="Please enter your name"
+      formControlName="name"
+      required
+    />
+    @if (name?.invalid && name?.touched) {
+      <span>Name is required</span>
+    }
+    <br />
+
+    <input
+      type="email"
+      placeholder="Please enter your email"
+      formControlName="email"
+    />
+    @if (email?.invalid && email?.touched) {
+      <span>Email is required</span>
+    }
+    <br />
+    <input
+      type="number"
+      placeholder="Please enter your phone"
+      formControlName="phone"
+    />
+    @if (phone?.invalid && phone?.touched) {
+      <span>Phone is required </span>
+    }
+    <!-- {{checkValidation(phone)}} -->
+
+    @if (phone?.hasError("maxLength")) {
+      <span>Password can have maximum 10 digits</span>
+    }
+    <br />
+    <input
+      type="file"
+      placeholder="Please enter your phone"
+      formControlName="photo"
+    />
+
+    <br />
+    <div>
+      <label for="">Gender : </label>
+      <select name="" id="" formControlName="gender">
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <input type="file" placeholder="Please enter your name" />
+      </select>
+      <!-- @if (phone.hasError("gender")) {
+        <span>Gender is required</span>
+      } -->
+    </div>
+    <br />
+    <input
+      type="password"
+      placeholder="Please enter your password"
+      formControlName="password"
+    />
+    @if (password?.invalid && password?.touched) {
+      <span>Phone is required</span>
+    }
+    @if (password?.hasError("minlength")) {
+      <div>Password must be at least 6 characters long.</div>
+    }
+    <br />
+    <span>Already have an Account? <a routerLink="/login">Login</a></span>
+    <button type="submit">Register</button>
+  </form>
+</div>
