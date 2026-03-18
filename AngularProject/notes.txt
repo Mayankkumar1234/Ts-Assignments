@@ -1,0 +1,5 @@
+ngfor :- Allow us to loop in the template file.(like app.html)
+
+
+{{}} -> Interpolation
+
