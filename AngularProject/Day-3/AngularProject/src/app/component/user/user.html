@@ -1,0 +1,21 @@
+<p>user works!</p>
+<!--  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string; 
+   rating:number -->
+
+<div>
+  @for (product of products; track product.id) {
+    <div>
+      <p>pid : {{ product.id }}</p>
+      <h3>{{ product.title }}</h3>
+      <h4>{{ product.price }}</h4>
+      <p>{{ product.description }}</p>
+      <p>{{ product.category }}</p>
+      <button>Update Product</button>
+      <button>Delete Product</button>
+    </div>
+  }
+</div>

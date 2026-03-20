@@ -1,0 +1,39 @@
+<!-- <p>two-way-data-binding works!</p>
+<div>
+  <!-- <app-two-way-data-binding></app-two-way-data-binding> -->
+<!-- <h1>{{ name() }}</h1>
+  <input type="text" [value]="name()" (input)="name.set($event.target.value)" />
+</div>
+
+<hr />
+<div> -->
+<!-- <p>Age:{{ age }}</p> -->
+<!-- <input type="text"   [(ngModel)]="age" />
+    -->
+<!-- <input type="text" [ngModel]="age" [ngModelChange]="age= $event"  >
+   
+</div> -->
+
+<h1>Two Way Data Binding</h1>
+
+<h2>{{ userData().name }}</h2>
+
+<input
+  type="text"
+  [value]="userData().name"
+  (input)="updateUserData('name', $event.target.value)"
+/>
+
+<h2>{{ userData().age }}</h2>
+<input
+  type="text"
+  [value]="userData().age"
+  (input)="updateUserData('age', $event.target.value)"
+/>
+<h2>{{ userData().email }}</h2>
+
+<input
+  type="text"
+  [value]="userData().email"
+  (input)="updateUserData('email', $event.target.value)"
+/>
