@@ -1,77 +1,212 @@
 <div id="main">
-  <form
-    [formGroup]="registrationForm"
-    id="registrationForm"
-    (ngSubmit)="onSubmit()"
-  >
-    <h1>Welcome to Registration Form</h1>
-    <input
-      type="text"
-      placeholder="Please enter your name"
-      formControlName="name"
-      required
-    />
-    @if (name?.invalid && name?.touched) {
-      <span>Name is required</span>
-    }
-    <br />
-
-    <input
-      type="email"
-      placeholder="Please enter your email"
-      formControlName="email"
-    />
-    @if (email?.invalid && email?.touched) {
-      <span>Email is required</span>
-    }
-    <br />
-    <input
-      type="number"
-      placeholder="Please enter your phone"
-      formControlName="phone"
-    />
-    @if (phone?.invalid && phone?.touched) {
-      <span>Phone is required </span>
-    }
-    <!-- {{checkValidation(phone)}} -->
-
-    @if (phone?.hasError("maxLength")) {
-      <span>Password can have maximum 10 digits</span>
-    }
-    <br />
-    <input
-      type="file"
-      placeholder="Please enter your phone"
-      formControlName="photo"
-    />
-
-    <br />
-    <div>
-      <label for="">Gender : </label>
-      <select name="" id="" formControlName="gender">
-        <option value="">Select Gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <input type="file" placeholder="Please enter your name" />
-      </select>
-      <!-- @if (phone.hasError("gender")) {
-        <span>Gender is required</span>
-      } -->
+  <h1>Welcome to Registration Form</h1>
+  <div id="container">
+    <div id="threeSteper">
+      <span
+        [style.backgroundColor]="step() >= 1 ? 'red' : ''"
+        (click)="handleStepperPage(1)"
+        >1</span
+      >
+      <p></p>
+      <span
+        [style.backgroundColor]="step() >= 2 ? 'red' : ''"
+        (click)="handleStepperPage(1)"
+        (click)="handleStepperPage(2)"
+        >2</span
+      >
+      <p></p>
+      <span
+        [style.backgroundColor]="step() >= 3 ? 'red' : ''"
+        (click)="handleStepperPage(1)"
+        (click)="handleStepperPage(3)"
+        >3</span
+      >
     </div>
-    <br />
-    <input
-      type="password"
-      placeholder="Please enter your password"
-      formControlName="password"
-    />
-    @if (password?.invalid && password?.touched) {
-      <span>Phone is required</span>
+    @if (step() === 1) {
+      <form action="" [formGroup]="registrationForm" id="registrationForm">
+        <h2>Enter Personal Details</h2>
+        <div formGroupName="step1">
+          <input
+            type="text"
+            placeholder="Please enter your name"
+            formControlName="name"
+            required
+            style="margin-bottom: 5px"
+          />
+          @if (
+            registrationForm.get("name")?.invalid &&
+            registrationForm.get("name")?.touched
+          ) {
+            <p class="highlight">Name is required</p>
+          }
+          <!-- @if (name?.invalid && name?.touched) {
+          <span>Name is required</span>
+        } -->
+
+          <input
+            type="email"
+            placeholder="Please enter your email"
+            formControlName="email"
+            style="margin-top: 5px"
+          />
+          @if (
+            registrationForm.get("email")?.errors?.["required"] &&
+            (registrationForm.get("email")?.touched ||
+              registrationForm.get("email")?.dirty)
+          ) {
+            <span class="highlight"> Email is required</span>
+          }
+          @if (registrationForm.get("email")?.errors?.["email"]) {
+            <p class="highlight">Please enter a valid email address</p>
+          }
+          <br />
+          <input
+            type="text"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            placeholder="Please enter your phone"
+            formControlName="phone"
+            style="margin-bottom: 5px"
+          />
+          @if (
+            registrationForm.get("phone")?.errors?.["required"] &&
+            registrationForm.get("phone")?.touched
+          ) {
+            {{ registrationForm.get("phone")?.errors?.["minlength"] }}
+            <span class="highlight"> Phone is required</span>
+          }
+          @if (registrationForm.get("phone")?.errors?.["minlength"]) {
+            {{ registrationForm.get("phone")?.errors?.["minlength"] }}
+            {{ registrationForm.get("phone")?.errors?.["pattern"] }}
+            <p class="highlight">Please enter a valid 10 digit nubmer</p>
+          }
+          <div
+            style="
+              margin-bottom: 5px;
+              display: flex;
+              justify-content: space-around;
+              width: 80%;
+            "
+          >
+            <select
+              formControlName="gender"
+              name=""
+              id=""
+              style="
+                padding: 10px;
+                font-weight: 700;
+                border-radius: 20px;
+                font-size: 16px;
+              "
+            >
+              <option value="">Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            <input
+              formControlName="photo"
+              style="padding: 10px; font-weight: 700"
+              type="file"
+              name=""
+              id=""
+            />
+          </div>
+          <button
+            class="commonButton"
+            style="position: relative; left: 35%; border-radius: 8px"
+            (click)="handleStepperPage(2)"
+          >
+            next
+          </button>
+        </div>
+      </form>
+    } @else if (step() === 2) {
+      <form action="" [formGroup]="registrationForm" id="registrationForm">
+        <h2>Enter your Address</h2>
+        <div formGroupName="step2">
+          <input
+            type="text"
+            placeholder="Please enter your area"
+            formControlName="area"
+            required
+          />
+          <!-- @if (name?.invalid && name?.touched) {
+          <span>Name is required</span>
+        } -->
+          <br />
+
+          <div class="innerDiv">
+            <input
+              type="text"
+              placeholder="Please enter your city"
+              formControlName="city"
+            />
+            <!-- @if (email?.invalid && email?.touched) {
+            <span>Email is required</span>
+          } -->
+            <br />
+            <select name="" id="" formControlName="state">
+              <option value="">Please select city</option>
+              @for (s of states; track s) {
+                <option [value]="s">{{ s }}</option>
+              }
+            </select>
+          </div>
+          <div
+            id="mid"
+            style="
+              width: 80%;
+              display: flex;
+              justify-content: flex-end;
+              gap: 1rem;
+            "
+          >
+            <button style="border-radius: 8px" (click)="decreseVal()">
+              prev
+            </button>
+            <button style="border-radius: 8px" (click)="handleStepperPage(3)">
+              next
+            </button>
+          </div>
+        </div>
+      </form>
+    } @else {
+      <form
+        action=""
+        [formGroup]="registrationForm"
+        id="registrationForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <h2>Create a Password</h2>
+        <div formGroupName="step3" class="innerDiv">
+          <input
+            type="password"
+            placeholder="Please enter your password"
+            formControlName="password"
+          />
+          <br />
+          <input
+            type="password"
+            placeholder="Confirm  your password"
+            formControlName="confirmPassword"
+          />
+        </div>
+
+        <div
+          style="
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+          "
+          id="last"
+        >
+          <button style="border-radius: 8px" (click)="decreseVal()">
+            prev
+          </button>
+          <button type="submit" style="border-radius: 8px">Submit</button>
+        </div>
+      </form>
     }
-    @if (password?.hasError("minlength")) {
-      <div>Password must be at least 6 characters long.</div>
-    }
-    <br />
-    <span>Already have an Account? <a routerLink="/login">Login</a></span>
-    <button type="submit">Register</button>
-  </form>
+  </div>
 </div>
