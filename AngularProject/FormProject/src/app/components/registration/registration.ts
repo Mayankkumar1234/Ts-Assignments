@@ -34,7 +34,7 @@ export class Registration {
     name:['',Validators.required],
      email:['', [Validators.required, Validators.email]],
        phone:['', [Validators.required, 
-  Validators.minLength(10) ,Validators.pattern(/^\d{10,15}$/)]],
+  Validators.minLength(10)]],
       photo:[''],
       gender:['', Validators.required]}
      address ={
@@ -60,6 +60,8 @@ export class Registration {
 
 
   step = signal(1)
+
+  currPage:number = 1;
   numArr = [1,2,3];
   states:string[] = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", " West Bengal"]
 
@@ -73,20 +75,26 @@ export class Registration {
   //   // debugger
   // }
 
-  valueChange(value: Event) {
-    console.log('====================================');
-    console.log(this.registrationForm);
-
-  }
+   
 
   handleStepperPage(page:number){
    
-
+    if(page>this.step()){
+       this.currPage = page
+    }
    
-    if(page === 2 && this.registrationForm.get("step1")?.valid)
-      {  this.step.set(page)
+    if(page === 2 && this.registrationForm.get("step1")?.valid  )
+      { 
+            const data:string  =  this.localStorageService.getData("users") || "{}"
+   const user:Record<string , User> = JSON.parse(data)  || {};
+   let email = this.registrationForm?.get("step1.email")?.value || ""
+   if(user[email]){
+    alert("User already exists");
+    return 
+   }
+        this.step.set(page)
    console.log(page)
-  }else if(page === 3 && this.registrationForm.get("step2")?.valid){
+  }else if(page === 3 && this.registrationForm.get("step2")?.valid ){
     this.step.set(page)
    console.log(page)
   }else{
@@ -95,38 +103,53 @@ export class Registration {
     console.log(this.registrationForm.get("step1")?.value)
     console.log(this.registrationForm.get("step2")?.valid)
     console.log(this.registrationForm.get("step2")?.value)
-    alert(`Please fill all the details of Page ${page-1}`)
+    // debugger
+    alert(`Please fill all the details of Page ${this.step()}`)
   }
 }
 decreseVal(){
   this.step.update(val=>val-1)
 }
 
-  onSubmit(){ 
-//     const userData:Partial<User> = this.registrationForm.value ;
+  onSubmit(){  
 
-//     const data:string  =  this.localStorageService.getData("users") || "{}"
-//    const user:Record<string , User> = JSON.parse(data)  || {};
-//   console.log(user)
-//   console.log(userData.email)
-//   if(!userData.email || !userData.name || !userData.password || !userData.phone){
-//     console.log("Please fill all the details")
-//     return 
-//   }
-//    const email = userData.email; 
+    const data:string  =  this.localStorageService.getData("users") || "{}"
+   const user:Record<string , User> = JSON.parse(data)  || {};
+  console.log(user)
+  const userData = this.registrationForm.value;
+  let email = this.registrationForm.value.step1?.email || "";
+   
+  if( this.registrationForm.get("step3")?.invalid){
+    alert("Please fill the details properly and password must be of length 6")
+    return 
+  }
 
-//       if(user[email]){
-//         alert("User already exists, Please login")
-//         return
-//       }
+      if(user[email]){
+        alert("User already exists, Please login")
+        return
+      }
   
-// console.log("User" ,userData)
-// if (userData && userData.email) {
-//   this.localStorageService.addData("users", JSON.stringify({...user ,[userData.email]: userData}));
-//   alert("User register  successfully")
-//     this.router.navigate(['/login']);
+      
+      if(userData.step3?.password !== userData.step3?.confirmPassword){
+        alert("Both the Password must be same, Please try again")
+        return
+      }
+if (userData && email) {
+  
+  console.log(this.registrationForm.value)
+  let email = userData.step1?.email || "";
+  let password = userData.step3?.password;
+  let UserData = {
+    email,
+    password
+  }
+  
+  
+  this.localStorageService.addData("users",JSON.stringify({...user,[email]:UserData}))
+  
+  alert("User register  successfully")
+    this.router.navigate(['/login']);
 
-console.log(this.registrationForm.value)
 }  
 
 // if (userData && userData.email) {
@@ -135,5 +158,7 @@ console.log(this.registrationForm.value)
 //   console.error("userData or email is missing");
 // }
    
-// } 
+// }
+
+  }
 }

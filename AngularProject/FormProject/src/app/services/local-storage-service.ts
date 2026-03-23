@@ -8,7 +8,7 @@ export class LocalStorageService {
   constructor(){
     console.log("Service called...")
   }
-  addData(dataType:string , data:string):void{
+  addData(dataType:string , data:string ):void{
     localStorage.setItem(dataType, data)
   }
   getData(dataType:string){

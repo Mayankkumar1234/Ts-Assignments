@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage-service';
 
@@ -9,23 +9,35 @@ type User={
    password:string | null
 }
 
+
+
+
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule , RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
- loginForm = new FormGroup({
-     
-     email:new FormControl('' , Validators.required),
-         password:new FormControl('',[ Validators.required,  Validators.minLength(6)]),
-  })
 
+
+
+ 
+
+
+
+export class Login {
+ 
+  private fb =  inject(FormBuilder)
+  loginForm =  this.fb.group({
+     email:['', [Validators.required, Validators.email]],
+       password:['', [Validators.required,Validators.minLength(6) ]]
+
+  })
   constructor(private router: Router, private localStorageService:LocalStorageService){}
   onSubmit(){ 
     // const userData:Data = this.loginForm.value as Data
-  //  console.log(this.loginForm.value
+   console.log(this.loginForm.value)
+   console.log()
   if (this.loginForm.invalid) {
     // this.loginForm.markAllAsTouched();
     alert("Please fill all required fields correctly");
@@ -55,7 +67,8 @@ export class Login {
     }
    }
     // this.router.redir
-    this.router.navigate(["/home"])
+    this.router.navigate(["/product"])
+    this.localStorageService.addData("auth", "yes")
     alert("Login Successfully!")
     this.loginForm.setValue({
       

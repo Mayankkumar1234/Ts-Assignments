@@ -3,21 +3,19 @@
   <div id="container">
     <div id="threeSteper">
       <span
-        [style.backgroundColor]="step() >= 1 ? 'red' : ''"
+        [style.backgroundColor]="currPage >= 1 ? 'red' : ''"
         (click)="handleStepperPage(1)"
         >1</span
       >
       <p></p>
       <span
-        [style.backgroundColor]="step() >= 2 ? 'red' : ''"
-        (click)="handleStepperPage(1)"
+        [style.backgroundColor]="currPage >= 2 ? 'red' : ''"
         (click)="handleStepperPage(2)"
         >2</span
       >
       <p></p>
       <span
-        [style.backgroundColor]="step() >= 3 ? 'red' : ''"
-        (click)="handleStepperPage(1)"
+        [style.backgroundColor]="currPage >= 3 ? 'red' : ''"
         (click)="handleStepperPage(3)"
         >3</span
       >
@@ -34,14 +32,11 @@
             style="margin-bottom: 5px"
           />
           @if (
-            registrationForm.get("name")?.invalid &&
-            registrationForm.get("name")?.touched
+            registrationForm.get("step1.name")?.invalid &&
+            registrationForm.get("step1.name")?.touched
           ) {
             <p class="highlight">Name is required</p>
           }
-          <!-- @if (name?.invalid && name?.touched) {
-          <span>Name is required</span>
-        } -->
 
           <input
             type="email"
@@ -50,18 +45,18 @@
             style="margin-top: 5px"
           />
           @if (
-            registrationForm.get("email")?.errors?.["required"] &&
-            (registrationForm.get("email")?.touched ||
-              registrationForm.get("email")?.dirty)
+            registrationForm.get("step1.email")?.invalid &&
+            (registrationForm.get("step1.email")?.touched ||
+              registrationForm.get("step1.email")?.dirty)
           ) {
-            <span class="highlight"> Email is required</span>
+            <span class="highlight">
+              Email is required and it must be valid!</span
+            >
           }
-          @if (registrationForm.get("email")?.errors?.["email"]) {
-            <p class="highlight">Please enter a valid email address</p>
-          }
+
           <br />
           <input
-            type="text"
+            type="number"
             inputmode="numeric"
             pattern="[0-9]*"
             placeholder="Please enter your phone"
@@ -69,17 +64,12 @@
             style="margin-bottom: 5px"
           />
           @if (
-            registrationForm.get("phone")?.errors?.["required"] &&
-            registrationForm.get("phone")?.touched
+            registrationForm.get("step1.phone")?.invalid &&
+            registrationForm.get("step1.phone")?.touched
           ) {
-            {{ registrationForm.get("phone")?.errors?.["minlength"] }}
             <span class="highlight"> Phone is required</span>
           }
-          @if (registrationForm.get("phone")?.errors?.["minlength"]) {
-            {{ registrationForm.get("phone")?.errors?.["minlength"] }}
-            {{ registrationForm.get("phone")?.errors?.["pattern"] }}
-            <p class="highlight">Please enter a valid 10 digit nubmer</p>
-          }
+
           <div
             style="
               margin-bottom: 5px;
@@ -103,6 +93,12 @@
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
+            @if (
+              registrationForm.get("step1.gender")?.invalid &&
+              registrationForm.get("step1.gender")?.touched
+            ) {
+              <span class="highlight"> Gender is required!</span>
+            }
             <input
               formControlName="photo"
               style="padding: 10px; font-weight: 700"
@@ -130,9 +126,12 @@
             formControlName="area"
             required
           />
-          <!-- @if (name?.invalid && name?.touched) {
-          <span>Name is required</span>
-        } -->
+          @if (
+            registrationForm.get("step2.area")?.invalid &&
+            registrationForm.get("step2.area")?.touched
+          ) {
+            <span class="highlight"> Street Address is required</span>
+          }
           <br />
 
           <div class="innerDiv">
@@ -141,9 +140,12 @@
               placeholder="Please enter your city"
               formControlName="city"
             />
-            <!-- @if (email?.invalid && email?.touched) {
-            <span>Email is required</span>
-          } -->
+            @if (
+              registrationForm.get("step2.city")?.invalid &&
+              registrationForm.get("step2.city")?.touched
+            ) {
+              <span class="highlight"> City is required</span>
+            }
             <br />
             <select name="" id="" formControlName="state">
               <option value="">Please select city</option>
@@ -151,6 +153,12 @@
                 <option [value]="s">{{ s }}</option>
               }
             </select>
+            @if (
+              registrationForm.get("step2.state")?.invalid &&
+              registrationForm.get("step2.state")?.touched
+            ) {
+              <span class="highlight"> State is required</span>
+            }
           </div>
           <div
             id="mid"
@@ -185,13 +193,28 @@
             formControlName="password"
           />
           <br />
+          @if (
+            registrationForm.get("step3.password")?.invalid &&
+            registrationForm.get("step3.password")?.touched
+          ) {
+            <p class="highlight">
+              Password is required And must be atleast 6 digit long
+            </p>
+          }
           <input
             type="password"
             placeholder="Confirm  your password"
             formControlName="confirmPassword"
           />
         </div>
-
+        @if (
+          registrationForm.get("step3.confirmPassword")?.invalid &&
+          registrationForm.get("step3.confirmPassword")?.touched
+        ) {
+          <p class="highlight">
+            Confirm Password is required And must be atleast 6 digit long
+          </p>
+        }
         <div
           style="
             width: 100%;
