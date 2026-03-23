@@ -1,1 +1,14 @@
-<p class="" style="font-size: 100px">cart works!</p>
+<div id="cartContainer">
+  <app-header></app-header>
+  <div id="cartItemContainer">
+    @for (item of cartData; track item.id) {
+      <div class="cartItem">
+        <img src="[item.thumbnail]" alt="" />
+        <p>{{ item.title }}</p>
+        <button>+</button>
+        <p>Count</p>
+        <button>-</button>
+      </div>
+    }
+  </div>
+</div>

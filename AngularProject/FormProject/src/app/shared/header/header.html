@@ -4,9 +4,11 @@
   <div>
     <ul id="rightSection">
       <li>
-        <a  [routerLink]="['/home/cart']" >Cart : <span>0</span> </a>
+        <a [routerLink]="['/home/cart']"
+          >Cart : <span>{{ cartItem.cartCount() }}</span>
+        </a>
       </li>
-      <li>
+      <li class="logout">
         <a [routerLink]="['/login']">Logout</a>
       </li>
     </ul>

@@ -19,7 +19,7 @@ type User = {
 
 @Component({
   selector: 'app-registration',
-  imports: [ReactiveFormsModule , RouterLink ],
+  imports: [ReactiveFormsModule ],
   templateUrl: './registration.html',
   styleUrl: './registration.css',
 })
@@ -61,7 +61,7 @@ export class Registration {
 
   step = signal(1)
 
-  currPage:number = 1;
+  currPage = 1;
   numArr = [1,2,3];
   states:string[] = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", " West Bengal"]
 
@@ -79,9 +79,11 @@ export class Registration {
 
   handleStepperPage(page:number){
    
-    if(page>this.step()){
+    if(page<this.step()){
+
        this.currPage = page
-    }
+     return 
+      }
    
     if(page === 2 && this.registrationForm.get("step1")?.valid  )
       { 
@@ -93,9 +95,12 @@ export class Registration {
     return 
    }
         this.step.set(page)
+        this.currPage = page
    console.log(page)
   }else if(page === 3 && this.registrationForm.get("step2")?.valid ){
     this.step.set(page)
+      this.step.set(page)
+        this.currPage = page
    console.log(page)
   }else{
 

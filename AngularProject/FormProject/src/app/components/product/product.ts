@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products-service';
 
 type Param = {
-  id?:string
-}
+  id?: string;
+};
 
 @Component({
   selector: 'app-product',
@@ -13,28 +13,31 @@ type Param = {
   styleUrl: './product.css',
 })
 export class Product {
-  currProd?:string;
-  product!:Product;
-constructor(public route:ActivatedRoute ,private productService:ProductsService){}
+  currProd?: string;
+  product!: Product;
+  constructor(
+    public route: ActivatedRoute,
+    private productService: ProductsService,
+  ) {}
 
-ngOnInit(){
-  this.route.params.subscribe((param:Param)=>{
-     if(param.id){
-      this.currProd = param.id
-     }
-  })
- 
- if(this.currProd){
-   this.productService.getSingleProduct(this.currProd).subscribe({
-    next:(data)=>{
-      if(data instanceof Object){
-        // this.product = data
+  ngOnInit() {
+    this.route.params.subscribe((param: Param) => {
+      if (param.id) {
+        this.currProd = param.id;
       }
-    },
-    error:(err)=>{
-      console.log(err)
+    });
+
+    if (this.currProd) {
+      //  this.productService.getSingleProduct(this.currProd).subscribe({
+      //   next:(data)=>{
+      //     if(data instanceof Object){
+      //       // this.product = data
+      //     }
+      //   },
+      //   error:(err)=>{
+      //     console.log(err)
+      //   }
+      //  })
     }
-   })
- }
-}
+  }
 }

@@ -20,7 +20,7 @@
         >3</span
       >
     </div>
-    @if (step() === 1) {
+    @if (currPage === 1) {
       <form action="" [formGroup]="registrationForm" id="registrationForm">
         <h2>Enter Personal Details</h2>
         <div formGroupName="step1">
@@ -116,7 +116,7 @@
           </button>
         </div>
       </form>
-    } @else if (step() === 2) {
+    } @else if (currPage === 2) {
       <form action="" [formGroup]="registrationForm" id="registrationForm">
         <h2>Enter your Address</h2>
         <div formGroupName="step2">

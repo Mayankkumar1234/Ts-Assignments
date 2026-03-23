@@ -1,22 +1,62 @@
 <div id="productContainer">
   <app-header></app-header>
   <div id="productSection">
-    <h1>Inside the Home Page</h1>
-    @for (product of productsArr; track product?.id) {
-      <div class="product">
-        <a [routerLink]="[product.id]">
-          <img style="width: 100px" [src]="product?.thumbnail" alt="" />
-          <h4>{{ product?.title }}</h4>
-          <h4>{{ product?.category }}</h4>
-          <h4>{{ product?.price }}</h4>
-          <p>{{ product?.rating }}</p>
-        </a>
+    <!-- <h1>Inside the Home Page</h1> -->
+
+    @if (loading) {
+      <div class="loading">
+        <p>Loading products...</p>
       </div>
     }
 
+    <div style="height: 80vh; width: 100%" id="h" (scroll)="onScroll($event)">
+      @for (product of productsArr(); track $index) {
+        <div class="product">
+          <a [routerLink]="[product?.id]">
+            <img style="width: 100px" [src]="product?.thumbnail" alt="" />
+            <h4>{{ product?.title }}</h4>
+            <h4>{{ product?.category }}</h4>
+            <h4>Price : {{ product?.price }}</h4>
+            <p>Rating :{{ product?.rating }}</p>
+          </a>
+          <button
+            style="
+              margin: auto;
+              padding: 8px;
+              border-radius: 8px;
+              border: none;
+              background-color: burlywood;
+              border: 1px solid gray;
+              position: relative;
+              left: 40%;
+              margin-bottom: 12px;
+              cursor: pointer;
+            "
+            (click)="cartServiceM(product)"
+          >
+            Add to Cart
+          </button>
+        </div>
+      }
+    </div>
     <div id="pagination">
+      <select  style="width: 60px; height: 40px; border-radius: 18px;" name="" id="" 
+      
+       (change)="handlePerPageProduct($event)"
+      >
+        <option value="">Select Pages</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="40">40</option>
+      </select>
       @for (page of pages; track page) {
-        <button>{{ page }}</button>
+        <button
+          (click)="handlePagination(page)"
+          [style.backgroundColor]="currPage() === page ? 'red' : null"
+        >
+          {{ page }}
+        </button>
       }
     </div>
   </div>

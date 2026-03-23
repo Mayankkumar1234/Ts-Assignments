@@ -1,0 +1,53 @@
+#productContainer{
+  background-color: antiquewhite;
+  min-height: 100vh;
+  width: 100%;
+
+}
+
+#productSection{
+  width: 100%;  
+  gap: 2rem;
+}
+#productSection>#h{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3 , 1fr);
+  gap: 2rem;
+  overflow-y: scroll;
+}
+.product>a{
+text-decoration: none;
+width: 100%;
+color: black; 
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column; 
+
+}
+.product>a>img{
+  margin: auto;
+  width: 100%;
+}
+.product{ 
+  width: 90%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 15px;
+}
+#pagination{
+ position: fixed;
+ bottom: 20px;
+ right: 20%; 
+ border-radius: 14px;
+}
+#pagination>button{
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 15px;
+  border: 1px solid grey;
+  cursor: pointer;
+  
+  
+}
