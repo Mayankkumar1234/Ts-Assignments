@@ -1,0 +1,28 @@
+<p>template-driven-froms works!</p>
+
+<form #useForm="ngForm" (ngSubmit)="formValues(useForm.value)">
+  <input
+    type="text"
+    name="email"
+    placeholder="Enter your email"
+    [(ngModel)]="email"
+  />
+  <br />
+  <br />
+  <input
+    type="password"
+    name="password"
+    placeholder="Enter your password"
+    [(ngModel)]="password"
+  />
+  <br /><br />
+  <select name="gender" [(ngModel)]="gender">
+    <option value="">Select your gender</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+  <br /><br />
+  <input type="range" min="0" max="20" name="range" [(ngModel)]="range" />
+  <br /><br />
+  <button>Add User</button>
+</form>

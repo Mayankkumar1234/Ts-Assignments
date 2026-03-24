@@ -1,0 +1,43 @@
+<!-- <p>members works!</p>
+
+<p>{{ title }}</p>
+
+@if (title == "") {
+ 
+  <h1>Incorrect Title</h1>
+} @else if (title == "Hello") {
+  <h1>Working title</h1>
+} @else {
+  <h2>Not working title</h2>
+} -->
+
+<!-- Track is used to keep track all the items in the array...  -->
+<!-- @for (item of items; track item.id; let i = $index; let total = $count) {
+  <p>Id : {{ item.id }}</p>
+  <h3>Name :{{ item.name }}</h3>
+  <p>{{ i }}</p>
+
+  <p>Total : {{ total }}</p>
+} -->
+
+<!-- $first = first value of the array -->
+<!-- $last = last value -->
+<!-- $even = even indexed value -->
+<!-- $odd = for the odd index value -->
+
+<div>
+  @switch(grade) {
+    @case ("A") {
+      <p>Excellence</p>
+    }
+    @case ("B") {
+      <p>Good</p>
+    }
+    @case ("C") {
+      <p>Average</p>
+    }
+    @case ("D") {
+      <p>Poor</p>
+    }
+  }
+</div>

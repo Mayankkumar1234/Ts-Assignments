@@ -1,0 +1,12 @@
+<p>directives works!</p>
+
+<div [ngStyle]="{ backgroundColor: color == 'blue' ? 'black' : 'red' }">
+  This is div
+</div>
+
+<p>Color :{{ color }}</p>
+
+<div>
+  <button (click)="setBgColor('blue')">Blue Color</button>
+  <button (click)="setBgColor('green')">Green Color</button>
+</div>

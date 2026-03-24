@@ -1,0 +1,48 @@
+<p>reactive-forms works!</p>
+
+<form action="">
+  <input type="text" placeholder="Enter your name" [formControl]="name" />
+  <input
+    type="text"
+    placeholder="Enter your password"
+    name=""
+    id=""
+    [formControl]="password"
+  />
+  <br />
+  <button (click)="handleFormValues($event)">Login</button>
+  <button (click)="setValues($event)">Set Form Values</button>
+</form>
+
+<div>
+   <h3>Name :{{ name.value }}</h3>
+  <h3>Password :{{ password.value }}</h3>  
+</div>
+
+<h1>Reactive Forms Using form group</h1>
+
+<!-- (ngSubmit)="onSubmit()" -->
+
+<form [formGroup]="profileForm">
+  <input type="text" placeholder="Enter name" formControlName="name" />
+  <span *ngIf="name?.hasEror('required')" style="color: yellow"
+    >Name is required</span
+  >
+  <br />
+  <br />
+  <input type="text" placeholder="Enter email" formControlName="email" />
+  <br />
+  <span *ngIf="email?.hasEror('required')" style="color: yellow"
+    >Email is required</span
+  >
+  <br />
+  <input type="text" placeholder="Enter password" formControlName="password" />
+  <br />
+  @if(profileForm.get('password')?.)
+  <span *ngIf="password?" style="color: yellow"
+    >Password is required</span
+  >
+  <br />
+  <button (click)="onSubmit()">Submit</button>
+  <!-- <button (click)="setValues()" >Set Values</button>
+</form>
