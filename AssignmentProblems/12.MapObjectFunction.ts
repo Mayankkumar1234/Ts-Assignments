@@ -1,5 +1,5 @@
 
-type keys = number | string | boolean
+type keys = number | string | boolean 
 
 type Obj = {
   [key:string]:keys

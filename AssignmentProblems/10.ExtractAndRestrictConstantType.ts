@@ -30,8 +30,16 @@ const componentOption = {
   ],
 };
 
-type HeaderVariants = "HeaderV1" | "HeaderV2" 
+// type HeaderVariants = "HeaderV1" | "HeaderV2" 
 
-type ButtonVariant = "ButtonV1";
+// type ButtonVariant = "ButtonV1";
+
+
+function mergeFunctionVariant(obj){
+
+}
+
+
+
 
 

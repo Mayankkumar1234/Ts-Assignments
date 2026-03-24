@@ -10,7 +10,7 @@ export class ApiService {
 
   apiUrl = 'https://dummyjson.com/';
 
-  get(route: string, limit: number, skip: number) {
+  get(route: string, limit?: number, skip?: number) {
     return this.http.get<ApiResonse>(
       `${this.apiUrl}${route}?limit=${limit}&skip=${skip}`,
     );

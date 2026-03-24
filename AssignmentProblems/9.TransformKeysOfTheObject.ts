@@ -27,7 +27,7 @@ function tranformKey<T> (arg:T,value:Partial<T>){
 }
 
  
-//  tranformKey(user,{firstName:"first",lastName:"last"})
+ tranformKey(user,{firstName:"first",lastName:"last"})
  
  
 

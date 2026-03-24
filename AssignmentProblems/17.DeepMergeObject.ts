@@ -4,11 +4,7 @@ type objRecord = Record<string , keysValue>;
 
 function deepMerge(obj1 ,obj2){
 let myObj:objRecord = {};
-for(let k  in obj1){
-  if(obj1[k] extends Object){
-    // deepMerge<>
-    }
-  }
+ 
 }
 
 const obj1 = { a: 1, b: { c: 2 } };

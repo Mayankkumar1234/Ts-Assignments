@@ -13,7 +13,7 @@ function updateObject(obj:myObj , key:string , value:keys){
   return obj
 }
 
-const obj:myObj = { a: 1, b: 'hello', c: true };
+const obj = { a: 1, b: 'hello', c: true };
 
 
 const updated = updateObject(obj, 'b', 'world')
