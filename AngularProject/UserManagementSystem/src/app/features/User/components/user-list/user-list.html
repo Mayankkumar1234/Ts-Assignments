@@ -1,0 +1,56 @@
+<!-- component.html -->
+
+<div id="listContainer">
+  <app-header></app-header>
+  <table cellpadding="12" cellspacing="1" border="1" class="simple-table">
+    <thead>
+      <tr>
+        <th>firstName</th>
+        <th>lastName</th>
+        <th>Gender</th>
+        <th>photo</th>
+        <th>phone</th>
+        <th>Email</th>
+        <th>StreetAddress</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Operation</th>
+      </tr>
+    </thead>
+    <tbody>
+        @for (user of userData(); track $index) {
+        <tr>
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.gender }}</td>
+          <td style="width: 50px; height: 50px; border-radius: 15px">
+            <img
+              style="width: 100%; border-radius: 50%"
+              [src]="user?.photo"
+              alt=""
+            />
+          </td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.streetAddress }}</td>
+          <td>{{ user.city }}</td>
+          <td>{{ user.state }}</td>
+          <td>
+            <button
+              style="
+                padding: 10px;
+                margin-right: 8px;
+                border-radius: 10px;
+                background-color: blanchedalmond;
+              "
+              (click)="deleteUser(user.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      } 
+    </tbody>
+  </table>
+  <!-- <app-add-details-form></app-add-details-form> -->
+</div>
