@@ -17,6 +17,7 @@ export class UserList {
   constructor(private localStorageService: LocalStorageService) {}
 
   ngOnInit() {
+    console.log('Inside Oninit');
     this.getUserData();
   }
 

@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-        @for (user of userData(); track $index) {
+      @for (user of userData(); track $index) {
         <tr>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
@@ -49,8 +49,8 @@
             </button>
           </td>
         </tr>
-      } 
+      }
     </tbody>
   </table>
-  <!-- <app-add-details-form></app-add-details-form> -->
+  <app-add-details-form></app-add-details-form>
 </div>

@@ -1,267 +1,271 @@
+Abhinav Jain
 <div id="main">
-  <h1>Add Product</h1>
-  <div id="container">
-    <div id="threeSteper">
-      <span
-        [style.backgroundColor]="currPage >= 1 ? 'red' : ''"
-        (click)="handleStepperPage(1)"
-        >1</span
-      >
-      <p></p>
-      <span
-        [style.backgroundColor]="currPage >= 2 ? 'red' : ''"
-        (click)="handleStepperPage(2)"
-        >2</span
-      >
-      <p></p>
-      <span
-        [style.backgroundColor]="currPage >= 3 ? 'red' : ''"
-        (click)="handleStepperPage(3)"
-        >3</span
-      >
-    </div>
-    @if (currPage === 1) {
-      <form action="" [formGroup]="registrationForm" id="registrationForm">
-        <h2>Enter Personal Details</h2>
-
-        <div
-          class="step1"
-          style="
-            margin-bottom: 5px;
-            display: flex;
-            justify-content: space-around;
-            gap: 20px;
-            width: 100%;
-          "
-          formGroupName="step1"
+  {{ formService.formStatus() }}
+  @if (formService.formStatus()) {
+    <h1>Add Product</h1>
+    <div id="container">
+      <div id="threeSteper">
+        <span
+          [style.backgroundColor]="currPage >= 1 ? 'red' : ''"
+          (click)="handleStepperPage(1)"
+          >1</span
         >
-          <input
-            type="text"
-            formControlName="firstName"
-            placeholder="Enter your firstName"
-            required
-            style="margin-bottom: 5px"
-          />
-          @if (
-            registrationForm.get("step1.firstName")?.invalid &&
-            registrationForm.get("step1.firstName")?.touched
-          ) {
-            <span class="highlight"> FirstName is required!</span>
-          }
-          <input
-            type="text"
-            placeholder="  enter your lastName"
-            formControlName="lastName"
-            required
-            style="margin-bottom: 5px"
-          />
-          @if (
-            registrationForm.get("step1.lastName")?.invalid &&
-            registrationForm.get("step1.lastName")?.touched
-          ) {
-            <p class="highlight">lastName is required</p>
-          }
+        <p></p>
+        <span
+          [style.backgroundColor]="currPage >= 2 ? 'red' : ''"
+          (click)="handleStepperPage(2)"
+          >2</span
+        >
+        <p></p>
+        <span
+          [style.backgroundColor]="currPage >= 3 ? 'red' : ''"
+          (click)="handleStepperPage(3)"
+          >3</span
+        >
+      </div>
+      @if (currPage === 1) {
+        <form action="" [formGroup]="registrationForm" id="registrationForm">
+          <h2>Enter Personal Details</h2>
 
           <div
+            class="step1"
             style="
               margin-bottom: 5px;
               display: flex;
               justify-content: space-around;
-              width: 80%;
+              gap: 20px;
+              width: 100%;
             "
+            formGroupName="step1"
           >
-            <select
-              formControlName="gender"
-              name=""
-              id=""
-              style="
-                padding: 10px;
-                font-weight: 700;
-                border-radius: 20px;
-                font-size: 16px;
-              "
-            >
-              <option value="">Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
+            <input
+              type="text"
+              formControlName="firstName"
+              placeholder="Enter your firstName"
+              required
+              style="margin-bottom: 5px"
+            />
             @if (
-              registrationForm.get("step1.gender")?.invalid &&
-              registrationForm.get("step1.gender")?.touched
+              registrationForm.get("step1.firstName")?.invalid &&
+              registrationForm.get("step1.firstName")?.touched
             ) {
-              <span class="highlight"> Gender is required!</span>
+              <span class="highlight"> FirstName is required!</span>
             }
             <input
-              formControlName="photo"
-              style="padding: 10px; font-weight: 700"
-              type="file"
-              name=""
-              id=""
+              type="text"
+              placeholder="  enter your lastName"
+              formControlName="lastName"
+              required
+              style="margin-bottom: 5px"
             />
+            @if (
+              registrationForm.get("step1.lastName")?.invalid &&
+              registrationForm.get("step1.lastName")?.touched
+            ) {
+              <p class="highlight">lastName is required</p>
+            }
+
+            <div
+              style="
+                margin-bottom: 5px;
+                display: flex;
+                justify-content: space-around;
+                width: 80%;
+              "
+            >
+              <select
+                formControlName="gender"
+                name=""
+                id=""
+                style="
+                  padding: 10px;
+                  font-weight: 700;
+                  border-radius: 20px;
+                  font-size: 16px;
+                "
+              >
+                <option value="">Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              @if (
+                registrationForm.get("step1.gender")?.invalid &&
+                registrationForm.get("step1.gender")?.touched
+              ) {
+                <span class="highlight"> Gender is required!</span>
+              }
+              <input
+                formControlName="photo"
+                style="padding: 10px; font-weight: 700"
+                type="file"
+                name=""
+                id=""
+              />
+            </div>
+            <button
+              class="commonButton"
+              style="position: relative; left: 35%; border-radius: 8px"
+              (click)="handleStepperPage(2)"
+            >
+              next
+            </button>
           </div>
-          <button
-            class="commonButton"
-            style="position: relative; left: 35%; border-radius: 8px"
-            (click)="handleStepperPage(2)"
-          >
-            next
-          </button>
-        </div>
-      </form>
-    } @else if (currPage === 2) {
-      <form action="" [formGroup]="registrationForm" id="registrationForm">
-        <h2>Enter your Cotact Details</h2>
-        <div formGroupName="step2">
-          <!-- <input
+        </form>
+      } @else if (currPage === 2) {
+        <form action="" [formGroup]="registrationForm" id="registrationForm">
+          <h2>Enter your Cotact Details</h2>
+          <div formGroupName="step2">
+            <!-- <input
             type="email"
             placeholder="Please enter your email"
             formControlName="email"
             style="margin-top: 5px"
           /> -->
-          <div formArrayName="email">
-            @for (email of emailControls.controls; track $index) {
-              <div class="input-group">
-                <input [formControlName]="$index" placeholder="Enter email" />
-                <button
-                  type="button"
-                  (click)="removeEmail($index)"
-                  [disabled]="emailControls.length === 1"
-                >
-                  Remove
-                </button>
+            <div formArrayName="email">
+              @for (email of emailControls.controls; track $index) {
+                <div class="input-group">
+                  <input [formControlName]="$index" placeholder="Enter email" />
+                  <button
+                    type="button"
+                    (click)="removeEmail($index)"
+                    [disabled]="emailControls.length === 1"
+                  >
+                    Remove
+                  </button>
 
-                @if (email.invalid && email.touched) {
-                  <small class="error">Please enter a valid email.</small>
-                }
-              </div>
+                  @if (email.invalid && email.touched) {
+                    <small class="error">Please enter a valid email.</small>
+                  }
+                </div>
+              }
+              <button type="button" (click)="addEmail()">+ Add Email</button>
+            </div>
+            @if (
+              registrationForm.get("step2.email")?.invalid &&
+              (registrationForm.get("step2.email")?.touched ||
+                registrationForm.get("step2.email")?.dirty)
+            ) {
+              <span class="highlight">
+                Email is required and it must be valid!</span
+              >
             }
-            <button type="button" (click)="addEmail()">+ Add Email</button>
-          </div>
-          @if (
-            registrationForm.get("step2.email")?.invalid &&
-            (registrationForm.get("step2.email")?.touched ||
-              registrationForm.get("step2.email")?.dirty)
-          ) {
-            <span class="highlight">
-              Email is required and it must be valid!</span
-            >
-          }
 
-          <br />
-          <div formArrayName="phone">
-            @for (phone of phoneControls.controls; track $index) {
-              <div class="input-group">
-                <input
-                  [formControlName]="$index"
-                  placeholder="Enter phone number"
-                />
-                <button
-                  type="button"
-                  (click)="removePhone($index)"
-                  [disabled]="phoneControls.length === 1"
-                >
-                  Remove
-                </button>
+            <br />
+            <div formArrayName="phone">
+              @for (phone of phoneControls.controls; track $index) {
+                <div class="input-group">
+                  <input
+                    [formControlName]="$index"
+                    placeholder="Enter phone number"
+                  />
+                  <button
+                    type="button"
+                    (click)="removePhone($index)"
+                    [disabled]="phoneControls.length === 1"
+                  >
+                    Remove
+                  </button>
 
-                @if (phone.invalid && phone.touched) {
-                  <small class="error">Please enter a valid number.</small>
-                }
-              </div>
+                  @if (phone.invalid && phone.touched) {
+                    <small class="error">Please enter a valid number.</small>
+                  }
+                </div>
+              }
+              <button type="button" (click)="addPhone()">+ Add number</button>
+            </div>
+
+            @if (
+              registrationForm.get("step2.phone")?.invalid &&
+              registrationForm.get("step2.phone")?.touched
+            ) {
+              <span class="highlight"> Phone is required</span>
             }
-            <button type="button" (click)="addPhone()">+ Add number</button>
           </div>
-
-          @if (
-            registrationForm.get("step2.phone")?.invalid &&
-            registrationForm.get("step2.phone")?.touched
-          ) {
-            <span class="highlight"> Phone is required</span>
-          }
-        </div>
-        <div
-          id="mid"
-          style="
-            width: 80%;
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-          "
+          <div
+            id="mid"
+            style="
+              width: 80%;
+              display: flex;
+              justify-content: flex-end;
+              gap: 1rem;
+            "
+          >
+            <button style="border-radius: 8px" (click)="decreseVal()">
+              prev
+            </button>
+            <button style="border-radius: 8px" (click)="handleStepperPage(3)">
+              next
+            </button>
+          </div>
+        </form>
+      } @else {
+        <form
+          action=""
+          [formGroup]="registrationForm"
+          id="registrationForm"
+          (ngSubmit)="onSubmit()"
         >
-          <button style="border-radius: 8px" (click)="decreseVal()">
-            prev
-          </button>
-          <button style="border-radius: 8px" (click)="handleStepperPage(3)">
-            next
-          </button>
-        </div>
-      </form>
-    } @else {
-      <form
-        action=""
-        [formGroup]="registrationForm"
-        id="registrationForm"
-        (ngSubmit)="onSubmit()"
-      >
-        <h2>Create a Password</h2>
-        <h2>Enter your Address</h2>
-        <div formGroupName="step3">
-          <input
-            type="text"
-            placeholder="Please enter your area"
-            formControlName="area"
-            required
-          />
-          @if (
-            registrationForm.get("step3.area")?.invalid &&
-            registrationForm.get("step3.area")?.touched
-          ) {
-            <span class="highlight"> Street Address is required</span>
-          }
-          <br />
-
-          <div class="innerDiv">
+          <h2>Create a Password</h2>
+          <h2>Enter your Address</h2>
+          <div formGroupName="step3">
             <input
               type="text"
-              placeholder="Please enter your city"
-              formControlName="city"
+              placeholder="Please enter your area"
+              formControlName="area"
+              required
             />
             @if (
-              registrationForm.get("step3.city")?.invalid &&
-              registrationForm.get("step3.city")?.touched
+              registrationForm.get("step3.area")?.invalid &&
+              registrationForm.get("step3.area")?.touched
             ) {
-              <span class="highlight"> City is required</span>
+              <span class="highlight"> Street Address is required</span>
             }
             <br />
-            <select name="" id="" formControlName="state">
-              <option value="">Please select city</option>
-              @for (s of states; track s) {
-                <option [value]="s">{{ s }}</option>
-              }
-            </select>
-            @if (
-              registrationForm.get("step3.state")?.invalid &&
-              registrationForm.get("step3.state")?.touched
-            ) {
-              <span class="highlight"> State is required</span>
-            }
-          </div>
-        </div>
 
-        <div
-          style="
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-          "
-          id="last"
-        >
-          <button style="border-radius: 8px" (click)="decreseVal()">
-            prev
-          </button>
-          <button type="submit" style="border-radius: 8px">Submit</button>
-        </div>
-      </form>
-    }
-  </div>
+            <div class="innerDiv">
+              <input
+                type="text"
+                placeholder="Please enter your city"
+                formControlName="city"
+              />
+              @if (
+                registrationForm.get("step3.city")?.invalid &&
+                registrationForm.get("step3.city")?.touched
+              ) {
+                <span class="highlight"> City is required</span>
+              }
+              <br />
+              <select name="" id="" formControlName="state">
+                <option value="">Please select city</option>
+                @for (s of states; track s) {
+                  <option [value]="s">{{ s }}</option>
+                }
+              </select>
+              @if (
+                registrationForm.get("step3.state")?.invalid &&
+                registrationForm.get("step3.state")?.touched
+              ) {
+                <span class="highlight"> State is required</span>
+              }
+            </div>
+          </div>
+
+          <div
+            style="
+              width: 100%;
+              display: flex;
+              justify-content: flex-end;
+              gap: 1rem;
+            "
+            id="last"
+          >
+            <button style="border-radius: 8px" (click)="decreseVal()">
+              prev
+            </button>
+            <button type="submit" style="border-radius: 8px">Submit</button>
+          </div>
+        </form>
+      }
+    </div>
+  }
 </div>

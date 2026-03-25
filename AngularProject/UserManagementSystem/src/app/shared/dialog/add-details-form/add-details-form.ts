@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, Inject, inject, signal } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -6,19 +6,23 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
-} from '@angular/forms';
-import { Router } from '@angular/router';
+} from '@angular/forms'; 
 import { LocalStorageService } from '../../services/local-storage-serice';
 import { User } from '../../../features/User/types/users.type';
+import { FormService } from '../../services/form-service';
 
 @Component({
   selector: 'app-add-details-form',
   imports: [ReactiveFormsModule],
   templateUrl: './add-details-form.html',
   styleUrl: './add-details-form.css',
+  providers: [FormService],
 })
 export class AddDetailsForm {
   private fb = inject(FormBuilder);
+  formService = inject(FormService);
+  localStorageService = inject(LocalStorageService);
+  displayForm = signal<boolean>(false);
   personalDetails = {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -80,14 +84,13 @@ export class AddDetailsForm {
     'Uttarakhand',
     ' West Bengal',
   ];
-  emailArray: any;
 
-  constructor(
-    private router: Router,
-    private localStorageService: LocalStorageService,
-  ) {}
-
-  ngOnInit() {}
+  // constructor() {
+  //   effect(() => {
+  //     const val = this.displayForm();
+  //     console.log('Change detected succesfully', val);
+  //   });
+  // }
 
   checkValidation(val: FormControl) {
     console.log(val.validator);
@@ -213,4 +216,13 @@ export class AddDetailsForm {
       this.phoneControls.removeAt(index);
     }
   }
+
+  // changeFormDisplayStatus() {
+  //   console.log('Inside the change Form Display status');
+  //   console.log(this.displayForm());
+  //   const updatedDisplayForm = !this.displayForm();
+  //   this.displayForm.set(updatedDisplayForm);
+
+  //   console.log(this.displayForm());
+  // }
 }
