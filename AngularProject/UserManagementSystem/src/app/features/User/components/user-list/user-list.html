@@ -2,6 +2,9 @@
 
 <div id="listContainer">
   <app-header></app-header>
+
+      
+
   <table cellpadding="12" cellspacing="1" border="1" class="simple-table">
     <thead>
       <tr>
@@ -26,12 +29,20 @@
           <td style="width: 50px; height: 50px; border-radius: 15px">
             <img
               style="width: 100%; border-radius: 50%"
-              [src]="user?.photo"
+              [src]="user.photo"
               alt=""
             />
           </td>
-          <td>{{ user.phone }}</td>
-          <td>{{ user.email }}</td>
+          <td>
+            @for (phone of user.phone; track $index) {
+              <div>{{ phone }}</div>
+            }
+          </td>
+          <td>
+            @for (email of user.email; track $index) {
+              <div>{{ email }}</div>
+            }
+          </td>
           <td>{{ user.streetAddress }}</td>
           <td>{{ user.city }}</td>
           <td>{{ user.state }}</td>
@@ -52,5 +63,5 @@
       }
     </tbody>
   </table>
-  <app-add-details-form></app-add-details-form>
+  <!-- <app-add-details-form></app-add-details-form> -->
 </div>

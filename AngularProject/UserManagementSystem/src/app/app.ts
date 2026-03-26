@@ -4,7 +4,7 @@ import { UserList } from './features/User/components/user-list/user-list';
 
 @Component({
   selector: 'app-root',
-  imports: [UserList],
+  imports: [UserList, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

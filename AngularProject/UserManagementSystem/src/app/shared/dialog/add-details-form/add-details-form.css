@@ -1,35 +1,33 @@
-#main{
+#main {
   width: 50%;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center; 
-    
-   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-   background-color: whitesmoke;
-   margin: auto;
-   position: absolute;
-   top: 5%;
-   left: 20%;
-   border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: whitesmoke;
+  margin: auto;
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  border-radius: 10%;
 }
-#container{
+#container {
   width: 100%;
   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-#threeSteper{
+#threeSteper {
   display: flex;
   gap: 1rem;
   padding-bottom: 1rem;
   align-items: center;
   justify-content: center;
 }
-#threeSteper span{
+#threeSteper span {
   border: 2px solid red;
   padding: 15px 20px;
   font-weight: 600;
@@ -38,86 +36,100 @@
   color: black;
 
   cursor: pointer;
-
-
 }
-#threeSteper p{
+#threeSteper p {
   background-color: blue;
   padding: 1px 55px;
   height: 0.1px;
 }
-.highlight{
-  color:red
+.highlight {
+  color: red;
 }
-h1{
+h1 {
   font-family: cursive;
   color: black;
 }
-#registrationForm{
+#registrationForm {
   padding: 10px 0px;
   width: 45%;
-  max-height: 50%; 
+  max-height: 50%;
   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   margin-top: 1%;
-   border-radius: 20px;
-  
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1%;
+  border-radius: 20px;
 }
-#registrationForm>h2{
+#registrationForm > h2 {
   /* color: white; */
   font-family: cursive;
 }
-#registrationForm>div{
+#registrationForm > div {
   width: 95%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-#registrationForm>div>input{
+#registrationForm > div > input {
   width: 65%;
-  
-  padding:10px;
+
+  padding: 10px;
   font-weight: 700;
   font-size: 16px;
 }
 /* step1 */
-#registrationForm>div>.step1>input{
+#registrationForm > div > .step1 > input {
   width: 65%;
-   
-  padding:10px;
+
+  padding: 10px;
   font-weight: 700;
   font-size: 16px;
 }
-#registrationForm>div>.innerDiv{
+.input-group > input {
+  width: 65%;
+
+  padding: 10px;
+  font-weight: 700;
+  font-size: 16px;
+}
+#photo {
+  width: 65%;
+
+  padding: 10px;
+  font-weight: 700;
+  font-size: 16px;
+}
+#registrationForm > div > .innerDiv {
   display: flex;
   gap: 10px;
 }
-#registrationForm>div>.innerDiv>input{
+#registrationForm > div > .innerDiv > input {
   width: 40%;
-  
-  padding:10px;
+
+  padding: 10px;
   font-weight: 700;
   font-size: 16px;
 }
-#registrationForm>.innerDiv>input{
+#registrationForm > .innerDiv > input {
   width: 40%;
-  
-  padding:10px;
+
+  padding: 10px;
   font-weight: 700;
   font-size: 16px;
 }
-#registrationForm>div>.innerDiv>select{
+#registrationForm > div > .innerDiv > select {
   width: 45%;
-  
-  padding:10px;
+
+  padding: 10px;
   font-weight: 700;
   font-size: 16px;
 }
 
-#mid>button,#last>button , #registrationForm>button , .commonButton{
+#mid > button,
+#last > button,
+#registrationForm > button,
+.commonButton {
   font-size: 16px;
   background-color: green;
   margin-top: 15px;

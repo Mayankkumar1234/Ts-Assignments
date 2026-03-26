@@ -6,10 +6,11 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
-} from '@angular/forms'; 
+} from '@angular/forms';
 import { LocalStorageService } from '../../services/local-storage-serice';
 import { User } from '../../../features/User/types/users.type';
 import { FormService } from '../../services/form-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-details-form',
@@ -19,6 +20,7 @@ import { FormService } from '../../services/form-service';
   providers: [FormService],
 })
 export class AddDetailsForm {
+  router = inject(Router);
   private fb = inject(FormBuilder);
   formService = inject(FormService);
   localStorageService = inject(LocalStorageService);
@@ -39,7 +41,7 @@ export class AddDetailsForm {
     ]),
   };
   address = {
-    area: ['', Validators.required],
+    streetAddress: ['', Validators.required],
     city: ['', Validators.required],
     state: ['', Validators.required],
   };
@@ -51,6 +53,13 @@ export class AddDetailsForm {
   });
 
   step = signal(1);
+
+  ngOnInit() {
+    // this.formService.formStatus.next(false);
+    this.formService.formStatus.subscribe((value) => {
+      this.displayForm.set(value);
+    });
+  }
 
   currPage = 1;
   numArr = [1, 2, 3];
@@ -103,6 +112,8 @@ export class AddDetailsForm {
       return;
     }
 
+    console.log(page);
+
     if (page === 2 && this.registrationForm.get('step1')?.valid) {
       const data: string = this.localStorageService.getData('users') || '{}';
       const user: Record<string, User> = JSON.parse(data) || {};
@@ -125,18 +136,25 @@ export class AddDetailsForm {
       console.log(this.registrationForm.get('step2')?.valid);
       console.log(this.registrationForm.get('step2')?.value);
       // debugger
-      alert(`Please fill all the details of Page ${this.step()}`);
+      alert(`Please fill all the details of current page`);
     }
   }
   decreseVal() {
-    this.step.update((val) => val - 1);
+    this.step.set(this.step() - 1);
+    console.log(this.step());
+    this.currPage = this.step();
   }
 
   onSubmit() {
-    // console.log(this.registrationForm.value);
-    // const data: string = this.localStorageService.getData('users') || '{}';
-    // const user: Record<string, User> = JSON.parse(data) || {};
-    // console.log(user);
+    console.log(this.registrationForm.value);
+    const data: string = this.localStorageService.getData('users') || '[]';
+    const user: User[] = JSON.parse(data);
+    console.log(user);
+
+    if (!this.registrationForm.get('step3')?.valid) {
+      alert('Please fill all the details');
+      return;
+    }
     // const userData = this.registrationForm.value;
     // let email = this.registrationForm.value.step2?.email || '';
 
@@ -162,21 +180,27 @@ export class AddDetailsForm {
     //   };
 
     const userData = {
+      id: Math.floor(Math.random() * Math.random() * 100000),
+
       ...this.registrationForm.value.step1,
       ...this.registrationForm.value.step2,
       ...this.registrationForm.value.step3,
     };
 
     console.log(userData);
-    // this.localStorageService.addData('users', JSON.stringify(userData));
 
-    // this.localStorageService.addData(
-    //   'users',
-    //   JSON.stringify({ ...user, [email]: UserData }),
-    // );
-
+    this.localStorageService.addData(
+      'users',
+      JSON.stringify([...user, userData]),
+    );
+    const confirmSave = confirm('Are you sure you want to save?');
+    if (!confirmSave) {
+      return;
+    }
+    this.router.navigate(['/']);
     alert('User Data  successfully');
-    //   this.router.navigate(['/login']);
+    this.router.navigate(['/']);
+
     // }
 
     // if (userData && userData.email) {
